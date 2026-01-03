@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Plus, X } from 'lucide-react';
 
 export default function GodsChoice() {
   const [options, setOptions] = useState(['', '']);
   const [result, setResult] = useState('');
   const [isRevealing, setIsRevealing] = useState(false);
+
+  const placeholders = [
+    'Go to the gym',
+    'Order pizza',
+    'Watch a movie',
+    'Read a book',
+    'Call a friend',
+    'Take a nap',
+    'Play games',
+    'Go for a walk'
+  ];
+
+  const getPlaceholder = (index) => {
+    return placeholders[index % placeholders.length] || `Option ${index + 1}`;
+  };
 
   const addOption = () => {
     setOptions([...options, '']);
@@ -36,74 +51,111 @@ export default function GodsChoice() {
       const randomIndex = Math.floor(Math.random() * validOptions.length);
       setResult(validOptions[randomIndex]);
       setIsRevealing(false);
-    }, 1800);
+    }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-6">
-      <div className="w-full max-w-lg">
+    <div className="min-h-screen bg-[#F0EBE3] flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#E4DCCF]/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#7D9D9C]/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      
+      <div className="w-full max-w-lg relative z-10">
+        {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-block mb-4 text-indigo-400">
-            <Sparkles size={32} strokeWidth={1.5} />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#7D9D9C] to-[#576F72] rounded-2xl mb-6 shadow-lg shadow-[#7D9D9C]/30">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Sun rays - representing divine light */}
+              <circle cx="16" cy="16" r="3" stroke="white" strokeWidth="2" fill="none" />
+              <line x1="16" y1="4" x2="16" y2="8" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <line x1="16" y1="24" x2="16" y2="28" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <line x1="4" y1="16" x2="8" y2="16" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <line x1="24" y1="16" x2="28" y2="16" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <line x1="8" y1="8" x2="10.5" y2="10.5" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <line x1="21.5" y1="21.5" x2="24" y2="24" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <line x1="24" y1="8" x2="21.5" y2="10.5" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <line x1="10.5" y1="21.5" x2="8" y2="24" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            </svg>
           </div>
-          <h1 className="text-4xl font-light text-slate-700 mb-3 tracking-wide">
+          <h1 className="text-5xl font-extralight text-[#576F72] mb-4 tracking-tight">
             God's Choice
           </h1>
-          <p className="text-slate-500 font-light text-sm leading-relaxed max-w-md mx-auto">
-            Helping you to find out hints for anything you are unsure about.<br />
-            God always knows the right one.
+          <p className="text-[#7D9D9C] font-light text-sm leading-relaxed max-w-sm mx-auto">
+            Helping you find hints for anything you're unsure about.
+            <br />
+            <span className="text-[#576F72]">God always knows the right one.</span>
           </p>
         </div>
 
+        {/* Options */}
         <div className="space-y-3 mb-8">
           {options.map((option, index) => (
-            <div key={index} className="relative">
-              <input
-                type="text"
-                value={option}
-                onChange={(e) => updateOption(index, e.target.value)}
-                placeholder={`Path ${index + 1}`}
-                className="w-full px-5 py-4 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl text-slate-700 placeholder-slate-400 focus:outline-none focus:border-indigo-300 focus:bg-white transition-all font-light shadow-sm"
-              />
-              {options.length > 2 && (
-                <button
-                  onClick={() => removeOption(index)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xl"
-                >
-                  ×
-                </button>
-              )}
+            <div key={index} className="relative group">
+              <div className="absolute inset-0 bg-[#7D9D9C]/20 rounded-3xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300"></div>
+              <div className="relative">
+                <input
+                  type="text"
+                  value={option}
+                  onChange={(e) => updateOption(index, e.target.value)}
+                  placeholder={getPlaceholder(index)}
+                  className="w-full px-6 py-4 bg-white backdrop-blur-xl border-2 border-[#E4DCCF] rounded-3xl text-[#576F72] placeholder-[#7D9D9C]/50 focus:outline-none focus:border-[#7D9D9C] focus:bg-white transition-all font-light shadow-sm hover:shadow-md hover:border-[#7D9D9C]/60"
+                />
+                {options.length > 2 && (
+                  <button
+                    onClick={() => removeOption(index)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all"
+                  >
+                    <X size={18} />
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>
 
+        {/* Add button */}
         <button
           onClick={addOption}
-          className="w-full mb-6 py-3 border border-slate-200 rounded-2xl text-slate-600 hover:border-indigo-200 hover:bg-white/50 transition-colors text-sm font-light tracking-wide"
+          className="w-full mb-6 py-4 border-2 border-dashed border-[#E4DCCF] rounded-3xl text-[#7D9D9C] hover:border-[#7D9D9C] hover:bg-white transition-all text-sm font-light tracking-wide flex items-center justify-center gap-2 group"
         >
-          + Add Another Path
+          <Plus size={20} className="group-hover:rotate-90 transition-transform duration-300" />
+          Add Another Path
         </button>
 
+        {/* Reveal button */}
         <button
           onClick={revealChoice}
           disabled={isRevealing}
-          className="w-full py-5 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-2xl hover:from-indigo-600 hover:to-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-light tracking-widest text-sm shadow-lg shadow-indigo-200/50"
+          className="w-full py-6 bg-[#576F72] text-white rounded-3xl hover:bg-[#7D9D9C] transition-all disabled:opacity-50 disabled:cursor-not-allowed font-light tracking-widest text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transform duration-200 relative overflow-hidden group"
         >
-          {isRevealing ? 'REVEALING...' : 'REVEAL THE CHOICE'}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+          <span className="relative flex items-center justify-center gap-2">
+            <Sparkles size={18} className={isRevealing ? 'animate-spin' : ''} />
+            {isRevealing ? 'REVEALING...' : 'REVEAL THE CHOICE'}
+          </span>
         </button>
 
+        {/* Result */}
         {(result || isRevealing) && (
-          <div className="mt-12 text-center p-8 bg-white/60 backdrop-blur-sm rounded-3xl border border-indigo-100 shadow-lg">
+          <div className="mt-12 text-center p-10 bg-white rounded-3xl border-2 border-[#E4DCCF] shadow-lg relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#7D9D9C]"></div>
             {isRevealing ? (
-              <div className="text-slate-500 font-light italic animate-pulse">
-                Seeking divine guidance...
+              <div className="space-y-4">
+                <div className="flex justify-center gap-2">
+                  <div className="w-2 h-2 bg-[#7D9D9C] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 bg-[#7D9D9C] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                  <div className="w-2 h-2 bg-[#576F72] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                </div>
+                <div className="text-[#576F72] font-light italic">
+                  Seeking divine guidance...
+                </div>
               </div>
             ) : (
-              <div className="space-y-3">
-                <div className="text-indigo-400 text-sm font-light tracking-wider">
-                  THE CHOSEN PATH
+              <div className="space-y-4 animate-fade-in">
+                <div className="text-[#7D9D9C] text-xs font-medium tracking-widest uppercase">
+                  ✦ The Chosen Path ✦
                 </div>
-                <div className="text-3xl text-slate-700 font-light tracking-wide">
+                <div className="text-4xl text-[#576F72] font-light tracking-wide leading-relaxed">
                   {result}
                 </div>
               </div>
@@ -111,6 +163,22 @@ export default function GodsChoice() {
           </div>
         )}
       </div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out;
+        }
+      `}</style>
     </div>
   );
 }
