@@ -1,80 +1,80 @@
-# gods-choice
+# God's Choice ✨
 
-Helping you to find out hints for anything you are unsure about. God always knows the right one.
+A minimalist decision-making tool that helps you find clarity when you're unsure. God always knows the right one.
 
-## Project Structure
+## About
 
-```
-gods-choice/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   └── GodsChoice.jsx
-│   ├── styles/
-│   │   └── GodsChoice.css
-│   ├── App.jsx
-│   ├── App.css
-│   └── index.jsx
-├── vite.config.js
-├── package.json
-├── README.md
-└── .gitignore
-```
+Helping you to find out hints for anything you are unsure about. Simply input your options, and let divine guidance reveal the chosen path.
+
+## Features
+
+- 🎯 Simple and intuitive interface
+- 🎨 Clean, modern design with soothing colors
+- ⚡ Instant random selection
+- 📱 Fully responsive
+- ✨ Smooth animations
+
+## Tech Stack
+
+- React 18
+- Tailwind CSS
+- Lucide React (icons)
+- Vite (build tool)
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
+
+- Node.js 16+ 
 - npm or yarn
 
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/gods-choice.git
+
+# Navigate to project directory
+cd gods-choice
+
+# Install dependencies
 npm install
-```
 
-### Development
-
-```bash
+# Start development server
 npm run dev
 ```
 
-This will start the development server at http://localhost:3000
+The app will be available at `http://localhost:5173`
 
-### Build
+### Build for Production
 
 ```bash
 npm run build
 ```
 
-Builds the app for production to the `dist` folder.
+## Usage
 
-### Preview
+1. Enter at least 2 options/paths you're deciding between
+2. Add more options if needed using the "+ Add Another Path" button
+3. Click "REVEAL THE CHOICE" to get your answer
+4. Remove options using the × button if you have more than 2
 
-```bash
-npm run preview
-```
+## Deployment
 
-Preview the production build locally.
+This project can be easily deployed to:
 
-## Features
-
-- 🎯 Ask a question you're unsure about
-- 💡 Get AI-powered hints to guide your decision
-- 🎨 Beautiful and responsive UI
-- ⚡ Fast and lightweight with Vite
-
-## Tech Stack
-
-- **React** - UI library
-- **Vite** - Build tool and dev server
-- **CSS** - Styling
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+- **Vercel**: `vercel --prod`
+- **Netlify**: Drag and drop the `dist` folder
+- **GitHub Pages**: Use `gh-pages` package
 
 ## License
 
 MIT
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+---
+
+Made with ✨ by [Your Name]
